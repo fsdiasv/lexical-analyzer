@@ -125,7 +125,17 @@ public class LScanner {
                         tokens.add(t);
                     }
                 }
+                // Se for um char literal
+                else if (scan.isCharLiteral(prelexem) ) {
 
+                    strltr = !strltr;
+
+                    stringliteral += prelexem;
+                    if(!strltr) {
+                        Token t = new Token("CHAR_LIT", stringliteral, lineNum, ++column);
+                        tokens.add(t);
+                    }
+                }
                 // Se for um identificador
                 else if (scan.isIdentifier(prelexem)) {
                     if (strltr) {
@@ -196,6 +206,17 @@ public class LScanner {
                                 stringliteral += nl;
                                 if(!strltr) {
                                     Token t = new Token("STR_LIT", stringliteral, lineNum, ++column);
+                                    tokens.add(t);
+                                }
+                            }
+                            // Se for um char literal
+                            else if (scan.isCharLiteral(prelexem) ) {
+
+                                strltr = !strltr;
+
+                                stringliteral += prelexem;
+                                if(!strltr) {
+                                    Token t = new Token("CHAR_LIT", stringliteral, lineNum, ++column);
                                     tokens.add(t);
                                 }
                             }
